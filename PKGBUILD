@@ -24,7 +24,7 @@ build() {
     find "$pkgname-$pkgver" -exec touch -t 202403120000 {} +
 
     # derive variables from private key
-    pubkey="$(openssl rsa -in copy-url-on-hover.pem -pubout -outform DER | base64 -w0)"
+    pubkey="$(openssl rsa -in "$_extension.pem" -pubout -outform DER | base64 -w0)"
     export _id="$(echo $pubkey | base64 -d | sha256sum | head -c32 | tr '0-9a-f' 'a-p')"
 
     # create extension json
